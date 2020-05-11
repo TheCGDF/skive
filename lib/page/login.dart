@@ -68,7 +68,7 @@ class _LogInPageState extends State<LogInPage> {
                   child: (() => _captchaImage != null
                           ? _captchaImage
                           : Image.memory(base64Decode(
-                              'iVBORw0KGgoAAAANSUhEUgAAAGQAAAAoCAQAAACicZfIAAAAO0lEQVR42u3PQREAAAgDINc/9Ezhx4MGpJ0XIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIicm8BF1dP2WLtVfwAAAAASUVORK5CYII=')))
+                              'iVBORw0KGgoAAAANSUhEUgAAAMgAAABQCAQAAAD2ZPI7AAAAgElEQVR42u3RAQ0AAAgDIN8/9K3hHFQg7XBIhAhBiBCECEGIEIQIQQhChCBECEKEIEQIQhAiBCFCECIEIUIQghAhCBGCECEIEYIQhAhBiBCECEGIEIQgRAhChCBECEKEIAQhQhAiBCFCECIEIQgRghAhCBGCECEIQYgQhAhByB8LXMSfsfEKQl0AAAAASUVORK5CYII=')))
                       .call(),
                   onPressed: refreshCaptcha,
                 ),
