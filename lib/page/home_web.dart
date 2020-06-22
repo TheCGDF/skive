@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:skive/page/login.dart';
-import 'package:skive/page/register.dart';
-import 'package:skive/storage/storage.dart'
-if (dart.library.js) 'package:skive/storage/storage_web.dart';
-import 'package:skive/page/user_center.dart';
+import 'package:skive/page_web/login.dart';
+import 'package:skive/page_web/page.dart';
+import 'package:skive/page_web/register.dart';
+import 'package:skive/storage/jwt_client.dart'
+    if (dart.library.js) 'package:skive/storage/jwt_web.dart';
+import 'package:skive/page_web/user_center.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -15,8 +16,8 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("SKIVE"),
-        actions: (() => jwt == null
+        title: appBarTitle('SKIVE', this),
+        actions: (() => currentJwt == null
             ? [
                 FlatButton(
                   child: Text('Register'),
@@ -32,8 +33,18 @@ class _HomePageState extends State<HomePage> {
             : [
                 FlatButton(
                   child: Text('User center'),
-                  onPressed: () => Navigator.pushReplacement(context,
-                      MaterialPageRoute(builder: (context) => UserCenterPage())),
+                  onPressed: () => Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => UserCenterPage())),
+                ),
+                IconButton(
+                  icon: Icon(Icons.exit_to_app),
+                  onPressed: () {
+                    setCurrentJwt(null);
+                    Navigator.pushReplacement(context,
+                        MaterialPageRoute(builder: (context) => HomePage()));
+                  },
                 )
               ]).call(),
       ),

@@ -1,12 +1,37 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 const apiUrl = 'https://skive.skimproj.com/api/';
 //const apiUrl = 'http://127.0.0.1:8080/';
 
 String language = 'en';
+
+Row appBarTitle(String text, State state) => Row(
+      children: [
+        Text(text),
+        SizedBox(width: 20),
+        DropdownButton(
+          value: language,
+          onChanged: (value) {
+            state.setState(() => language = value);
+          },
+          items: [
+            DropdownMenuItem(
+              child: Text('en'),
+              value: 'en',
+            ),
+            DropdownMenuItem(
+              child: Text('简体中文'),
+              value: 'zh-CN',
+            )
+          ],
+        )
+      ],
+    );
 
 const resultSuccess = 1;
 const resultFailed = 2;

@@ -25,16 +25,22 @@ void _windowsStorageSet(String key, dynamic value) {
   _windowsStorage.writeAsStringSync(jsonEncode(windowsStorageJson));
 }
 
-String get jwt {
+String _jwt = () {
   if (Platform.isWindows) {
     return _windowsStorageGet('Jwt');
   }
   throw UnsupportedError;
-}
+}.call();
 
-set jwt(String jwtSet) {
+String get jwt => _jwt;
+
+void setJwt(String jwtNew, bool save) {
+  _jwt = jwtNew;
+  if (!save) {
+    return;
+  }
   if (Platform.isWindows) {
-    _windowsStorageSet('Jwt', jwtSet);
+    _windowsStorageSet('Jwt', jwtNew);
     return;
   }
   throw UnsupportedError;

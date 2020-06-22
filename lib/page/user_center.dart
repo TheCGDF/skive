@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:skive/page/home.dart';
-import 'package:skive/storage/storage.dart'
-if (dart.library.js) 'package:skive/storage/storage_web.dart';
+import 'package:skive/page_web/home_web.dart';
+import 'package:skive/page_web/page.dart';
+import 'package:skive/storage/jwt_client.dart'
+    if (dart.library.js) 'package:skive/storage/jwt_web.dart';
 
 class UserCenterPage extends StatefulWidget {
   @override
@@ -13,12 +14,12 @@ class _UserCenterPageState extends State<UserCenterPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("USER CENTER"),
+        title: appBarTitle("USER CENTER", this),
         actions: [
           IconButton(
             icon: Icon(Icons.exit_to_app),
             onPressed: () {
-              jwt = null;
+              logoutJwt(currentJwt);
               Navigator.pushReplacement(
                   context, MaterialPageRoute(builder: (context) => HomePage()));
             },

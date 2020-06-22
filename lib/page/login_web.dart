@@ -3,12 +3,12 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
-import 'package:skive/page/home.dart';
-import 'package:skive/page/page.dart';
-import 'package:skive/page/register.dart';
-import 'package:skive/page/user_center.dart';
-import 'package:skive/storage/storage.dart'
-    if (dart.library.js) 'package:skive/storage/storage_web.dart';
+import 'package:skive/page_web/home_web.dart';
+import 'package:skive/page_web/page.dart';
+import 'package:skive/page_web/register.dart';
+import 'package:skive/page_web/user_center.dart';
+import 'package:skive/storage/jwt_web.dart';
+import 'package:skive/storage/jwt_web.dart';
 
 class LogInPage extends StatefulWidget {
   @override
@@ -33,7 +33,7 @@ class _LogInPageState extends State<LogInPage> {
   Widget build(context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("LOGIN"),
+        title: appBarTitle("LOGIN", this),
         actions: [
           FlatButton(
             child: Text('Register'),
@@ -49,8 +49,7 @@ class _LogInPageState extends State<LogInPage> {
       ),
       body: Center(
         child: SizedBox(
-          width: 200,
-          height: 300,
+          width: 240,
           child: Form(
             key: _formKey,
             child: ListView(
@@ -76,6 +75,11 @@ class _LogInPageState extends State<LogInPage> {
                   controller: _captchaController,
                   decoration: InputDecoration(labelText: 'Code'),
                 ),
+                CheckboxListTile(
+                  title: Text('Auto login next time'),
+                  value: saveJwt,
+                  onChanged: (auto) => setState(() => saveJwt = auto),
+                ),
                 Builder(
                   builder: (context) => RaisedButton(
                     child: Text('Login'),
@@ -99,7 +103,7 @@ class _LogInPageState extends State<LogInPage> {
                         ));
                         return;
                       }
-                      jwt = response['Jwt'];
+                      setCurrentJwt(response['Jwt']);
                       Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
@@ -118,14 +122,14 @@ class _LogInPageState extends State<LogInPage> {
   void refreshCaptcha() async {
     var response = await getApi('public/captcha', {
       'language': language,
-      'width': 200,
+      'width': 240,
       'height': 80,
     });
     if (response['Result'] != resultSuccess) {
       return;
     }
     setState(() {
-      _captchaHashId=response['HashId'];
+      _captchaHashId = response['HashId'];
       String imageBase64 = response['Picture'];
       imageBase64 = imageBase64.substring('data:image/png;base64,'.length);
       _captchaImage = Image.memory(base64Decode(imageBase64));
