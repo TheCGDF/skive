@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:skive/page_web/home_web.dart';
-import 'package:skive/page_web/page.dart';
+import 'package:skive/page/home_web.dart';
+import 'package:skive/page/page.dart';
 import 'package:skive/storage/jwt_client.dart'
     if (dart.library.js) 'package:skive/storage/jwt_web.dart';
 
@@ -19,7 +19,7 @@ class _UserCenterPageState extends State<UserCenterPage> {
           IconButton(
             icon: Icon(Icons.exit_to_app),
             onPressed: () {
-              logoutJwt(currentJwt);
+              logoutJwt();
               Navigator.pushReplacement(
                   context, MaterialPageRoute(builder: (context) => HomePage()));
             },

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:skive/page/home.dart';
+import 'package:skive/page/home_client.dart'
+    if (dart.library.js) 'package:skive/page/home_web.dart';
 
 void main() {
   runApp(MaterialApp(

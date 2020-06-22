@@ -1,20 +1,27 @@
 import 'dart:js' as js;
 
 import 'package:flutter/foundation.dart';
+import 'package:skive/storage/cookie_web.dart';
 
-String _jwt = (() => kIsWeb
+String _currentJwt = (() => kIsWeb
     ? js.context.callMethod('getCookie', ['Jwt'])
     : throw UnsupportedError).call();
+String get currentJwt => _currentJwt;
 
-String get jwt => _jwt;
-
-void setJwt(String jwtNew, bool save) {
-  _jwt = jwtNew;
-  if (!save) {
+void setCurrentJwt(String jwt) {
+  _currentJwt = jwt;
+  if (!saveJwt) {
     return;
   }
-
   kIsWeb
-      ? js.context.callMethod('setCookie', ['Jwt', jwtNew, 24 * 7])
+      ? js.context.callMethod('setCookie', ['Jwt', jwt, 24 * 7])
+      : throw UnsupportedError;
+}
+
+void logoutJwt(){
+  _currentJwt=null;
+  saveJwt=false;
+  kIsWeb
+      ? js.context.callMethod('removeCookie', ['Jwt'])
       : throw UnsupportedError;
 }

@@ -1,13 +1,11 @@
 import 'dart:convert';
-import 'dart:io';
-import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
-import 'package:skive/page_web/home_web.dart';
-import 'package:skive/page_web/page.dart';
-import 'package:skive/page_web/register.dart';
-import 'package:skive/page_web/user_center.dart';
-import 'package:skive/storage/jwt_web.dart';
+import 'package:skive/page/home_web.dart';
+import 'package:skive/page/page.dart';
+import 'package:skive/page/register_web.dart';
+import 'package:skive/page/user_center.dart';
+import 'package:skive/storage/cookie_web.dart';
 import 'package:skive/storage/jwt_web.dart';
 
 class LogInPage extends StatefulWidget {

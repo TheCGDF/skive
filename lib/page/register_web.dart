@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:skive/page_web/home_web.dart';
-import 'package:skive/page_web/login.dart';
-import 'package:skive/page_web/page.dart';
+import 'package:skive/page/home_web.dart';
+import 'package:skive/page/login_web.dart';
+import 'package:skive/page/page.dart';
 
 class SignUpPage extends StatefulWidget {
   @override

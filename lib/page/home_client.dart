@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:skive/storage/jwt_client.dart';
 import 'package:skive/storage/storage_client.dart';
 
 class HomePage extends StatefulWidget {

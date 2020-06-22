@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:skive/page_web/login.dart';
-import 'package:skive/page_web/page.dart';
-import 'package:skive/page_web/register.dart';
-import 'package:skive/storage/jwt_client.dart'
-    if (dart.library.js) 'package:skive/storage/jwt_web.dart';
-import 'package:skive/page_web/user_center.dart';
+import 'package:skive/page/login_web.dart';
+import 'package:skive/page/page.dart';
+import 'package:skive/page/register_web.dart';
+import 'package:skive/storage/jwt_web.dart';
+import 'package:skive/page/user_center.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -41,7 +40,7 @@ class _HomePageState extends State<HomePage> {
                 IconButton(
                   icon: Icon(Icons.exit_to_app),
                   onPressed: () {
-                    setCurrentJwt(null);
+                    logoutJwt();
                     Navigator.pushReplacement(context,
                         MaterialPageRoute(builder: (context) => HomePage()));
                   },
